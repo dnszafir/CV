@@ -1,4 +1,4 @@
-\documentclass[10.5pt,letterpaper,final]{moderncv}
+\documentclass[10pt,letterpaper,final]{moderncv}
 
 % Change this to a color definition from moderncvthemeclassic.sty to change the color
 \moderncvstyle{classic}
@@ -26,14 +26,14 @@
 
 \definecolor{Gray}{gray}{0.5}
 \pagestyle{fancy}
-\rfoot{\color{Gray}\thepage/8}
+\rfoot{\color{Gray}\thepage/9}
 \lfoot{}
 \cfoot{}
 
 % personal data
 \name{Danielle}{Albers Szafir}
 \title{University of Colorado Boulder}
-\subtitle{\small{{{Homepage: {\color{web}\url{http://www.danielleszafir.com}}}}}}
+\subtitle{\small{{{Homepage: {\color{web}\url{http://www.danielleszafir.com/}}}}\\Lab Website: {\color{web}\url{http://cmci.colorado.edu/visualab/}}}}
 % \newline {\color{titlecolor}\rule{\textwidth}{.25ex}} \small\\[3pt]{\texttt{{Homepage: {\color{web}\url{http://cs.wisc.edu/~dalbers}}}}}
 
 \extrainfo{315 UCB \\ Department of Information Science  \\  University of Colorado \\ \vspace{12pt} Boulder, CO 80309 \\ \fixedphonesymbol 303.492.8532\\ \emailsymbol danielle.szafir@colorado.edu}
@@ -50,6 +50,56 @@
 %  \kern-.0333emn%
 %  \kern-.0667em\TeX%
 %  \kern-.0333emt}
+\makeatletter
+% User command: \genhrulefill
+% This time we make it full-fledged! (:-)
+%
+% SYNOPSIS
+%   - \genhrulefill[<base_height>][<thickness>]
+%       A rule of thickness <thickness> whose lower edge runs
+%       at a height of <base_height> above the baseline of the text.
+%   - \genhrulefill[<base_height>]
+%       A rule of default thickness (0.4pt) whose lower edge runs
+%       at a height of <base_height> above the baseline of the text.
+%   - \genhrulefill
+%       A rule of default thickness (0.4pt) whose lower edge runs
+%       along the baseline of the text.
+%   - \genhrulefill*[<thickness>]
+%       A rule of thickness <thickness> whose axis is aligned along
+%       the math axis.
+%   - \genhrulefill*
+%       A rule of default thickness (0.4pt) whose axis is aligned along
+%       the math axis.
+\newcommand*\genhrulefill{%
+	\begingroup % paranoid -- it's because we use \@tempdima, etc.
+	\@ifstar \@s@genhrulefill \@n@genhrulefill
+}
+
+\newcommand*\@n@genhrulefill[1][\z@]{%
+	\setlength\@tempdimb{#1}%
+	\@x@genhrulefill
+}
+\newcommand*\@x@genhrulefill[1][.4\p@]{%
+	\@tempdima \@tempdimb
+	\addtolength\@tempdima{#1}%
+	\@genhrulefill
+}
+
+\newcommand*\@s@genhrulefill[1][.4\p@]{%
+	\setbox\z@ \hbox{$\global \dimen@i \fontdimen22\textfont\tw@$}%
+	\setlength\@tempdima{#1}%
+	\@tempdimb \dimexpr \dimen@i-\@tempdima/\tw@
+	\advance \@tempdima \@tempdimb
+	\@genhrulefill
+}
+
+\newcommand*\@genhrulefill{%
+	\leavevmode
+	\leaders \hrule \@height \@tempdima \@depth -\@tempdimb \hfill
+	\null
+	\endgroup
+}
+\makeatother
 \definecolor{web}{rgb}{0.2,0.2,0.2}
 %\definecolor{web}{rgb}{0.5,0.5,0.5}
 %----------------------------------------------------------------------------------
@@ -58,8 +108,8 @@
 \begin{document}
 	\makecvtitle
 \vspace{-30pt}
-\section{\textbf{Research Statement}}
-\cvpubitem{My research bridges data visualization and perception to drive the design of novel systems for analyzing large and complex datasets. I focus on expanding our knowledge of perception in order to evaluate how visualization design impacts users' abilities to accomplish their analytical goals. Through this process, I derive quantified insight into the role of  perception in interpreting visualizations by gauging how real viewers in natural environments perceive encoded information. I use this knowledge to design systems and techniques that overcome scalability and interpretability limitations in existing designs. The resulting visualizations address research problems across a variety of domains, including genomics, proteomics, biochemistry, and the humanities.}
+%\section{\textbf{Research Statement}}
+%\cvpubitem{My research bridges data visualization and perception to drive the design of novel systems for analyzing large and complex datasets. I focus on expanding our knowledge of visual  in order to evaluate how visualization design impacts users' abilities to accomplish their analytical goals. Through this process, I derive quantified insight into the role of  perception in interpreting visualizations by anticipating how people will interpret encoded information and use this knowledge to design systems and techniques that overcome scalability and interpretability limitations to tackle new challenges in their data. The resulting visualizations address research problems across a variety of domains, including genomics, proteomics, biochemistry, and the humanities.}
 %My goal is to develop an understanding of visual perception in real-world contexts to drive the design of displays for visual exploration and communication. I focus on developing visualization techniques to support graphical comparisons of large and complex datasets with a special emphasis on enhancing the scalability and interpretability of visual displays across a variety of domains.
 %I have coordinated multiple efforts aimed at creating a sustained dialog between diverse groups of researchers across the University of Wisconsin-Madison campus to build broader collaborative networks that connect digital practitioners and domain researchers.
 
@@ -72,10 +122,12 @@
 %\vspace{3pt}
 \section{\textbf{Professional Experience}}
 %\subsection{{Academia}}
-\cventry{2015--Present}{{Founding Assistant Professor}}{Department of Information Science, University of Colorado Boulder}{}{}
+\cventry{2015--Present}{{Assistant Professor \& Founding Faculty Member}}{Department of Information Science, University of Colorado Boulder}{}{}
 {
 	%Founding faculty member of the Department of Information Science in the College of Media, Communication, and Information. \newline 
-	\emph{Affliate Appointments:} Department of Computer Science, Institute of Cognitive Science 
+	Assistant Professor in the Department of Computer Science \emph{by courtesy}\\
+	Assistant Professor in the Center for Research Data \& Digital Scholarship \emph{by courtesy}\\
+	Fellow in the Institute of Cognitive Science
 }
 \cventry{2010--2015}{{Research Assistant}}{Department of Computer Sciences, University of Wisconsin-Madison}{}{}
 {}
@@ -89,12 +141,12 @@
 %Worked with Vidya Setlur and Maureen Stone investigating interactions of color, task, and data in information visualization.}
 %{Worked with Vidya Setlur and Maureen Stone investigating interactions of color, task, and data in visualization. \vspace{6pt} \newline
 %Conducted a series of internal and external experiments gauging perceptual effects of color appearance in information visualization, resulting in multiple publications and an on-going collaboration with Tableau Research.}
-\cventry{2012}{{Software Development Intern}}{Google, Madison, WI}{}{}
+\cventry{2012}{{Software Development Intern}}{Google, Inc., Madison, WI}{}{}
 {}
 %Designed and prototyped a web-based bioinformatics data storage and analytics platform leveraging cutting-edge cloud technologies and computational analysis techniques to manage biological data at massive scales.}
 %{Designed and prototyped a novel web-based bioinformatics data storage and analytics platform leveraging cutting-edge cloud technologies.\vspace{6pt} \newline
 %Worked with developers at several domestic and international offices to interface multiple computational and storage platforms and build a working knowledge of web development best practices and computational analysis techniques to manage data at massive scales.}
-\cventry{2009}{{Software Development Intern}}{Boston Scientific, CRM, Redmond, WA}{}{}
+\cventry{2009}{{Software Development Intern}}{Boston Scientific, Redmond, WA}{}{}
 {}
 %Designed an application to automatically derive complete parameter-based test suites for Class 3 medical devices, automating testing for over 3,000 different device parameters.}
 \cventry{2008--2009}{Software Development Intern}{Apptio, Bellevue, WA}{}{}
@@ -102,13 +154,13 @@
 %Served as the first intern for the company, debugging and developing analytic dashboards for predictive business intelligence applications.}
 
 %\vspace{3pt}
+\vspace{-6pt}
 \section{\textbf{Education}}
 \cventry{2009--2015}{{{Ph.D. in Computer Sciences}}}{University of Wisconsin-Madison}{}{}{
 %Studying computer graphics and visualization under Professor Michael Gleicher.\vspace{3pt} \newline
-\emph{Dissertation}: ``Utilizing Color for Perceptually-Driven Data Visualization.'' \newline
+Minor studies in Perceptual Psychology and Art History\newline{Dissertation}: ``Utilizing Color for Perceptually-Driven Data Visualization'' \newline
 %Conducting research on perceptually-motivated design for scalable data visualization.\vspace{6pt} \newline
-\emph{Thesis Committee}: Michael Gleicher, Steven Franconeri, Bilge Mutlu, Robert Roth, \& Kevin Ponto.\newline
-Minor studies in perceptual psychology and art history.\newline
+{Dissertation Committee}: Drs. Michael Gleicher, Steven Franconeri, Bilge Mutlu, Robert Roth, \& Kevin Ponto
 %GPA: 3.82/4.00.
 }
 
@@ -116,164 +168,288 @@ Minor studies in perceptual psychology and art history.\newline
 %GPA: 3.77/4.00.}
 
 \cventry{2007--2009}{{Bachelor of Science in Computer Science}}{University of Washington}{}{}{
-NASA Space Grant Scholar, four-time Dean's List Member, graduated at age 20.\newline
-Minor in mathematics.}
+NASA Space Grant Scholar \& four-time Dean's List Member\newline
+Graduated at age 20\newline
+Minor in Mathematics}
 %Graduated at age 20.\vspace{3pt} \newline
 %GPA: 3.60/4.00.}
 %\section{\textbf{Academic Background}}
 %\cvitem{Computer Science}{}
 %\cvitem{Mathematics}{}
 
-\vspace{3pt}
+\vspace{-6pt}
 \section{\textbf{Honors \& Awards}}
-\cventry{2014}{{MERL Best Student Paper Award}}{IS\&T 22nd Color and Imaging Conference for "Adapting Color Difference for Design"}{}{}{}
-\cventry{2014}{{Invited Participant}}{Genres of Scholarly Knowledge Production 2014}{}{}{}
-\cventry{2014}{{Honorable Mention for Best Presentation}}{McPherson Eye Research Institute Symposium}{}{}{}
-\cventry{2014}{{Andrew W. Mellon Workshop Grant}}{Digital Humanities Research Network}{}{}{}
-\cventry{2013}{{Best SciVis Poster Award}}{IEEE VIS for "Lightness Constancy in Surface Visualization"}{}{}{}
-\cventry{2013}{{Invited Participant}}{IEEE VIS Doctoral Colloquium}{}{}{}
-\cventry{2010--2012}{{Research Fellow}}{BACTER Institute, University of Wisconsin-Madison}{}{}{}
-\cventry{2007--2009}{{NASA Space Grant Scholar}}{NASA Space Grant, University of Washington Chapter}{}{}{}
-\cventry{2007--2009}{{Dean's List Member}}{University of Washington}{}{}{}
+\cventry{2018}{{Forbes 30 Under 30 for Science}}{Forbes Magazine}{}{}{}\vspace{-3pt}
+\cventry{2017}{{Best Paper Award}}{IEEE VIS Information Visualization for ``Modeling Color Difference for Visualization Design''}{}{}{}\vspace{-3pt}
+\cventry{2016}{{Doctoral Dissertation Award Honorable Mention}}{IEEE Visualization and Graphics Technical Committee VGP Doctoral Dissertation Award}{}{}{}\vspace{-3pt}
+\cventry{2014}{{MERL Best Student Paper Award}}{IS\&T 22nd Color and Imaging Conference for "Adapting Color Difference for Design"}{}{}{}\vspace{-3pt}
+%\cventry{2014}{{Invited Participant}}{Genres of Scholarly Knowledge Production 2014}{}{}{}\vspace{-3pt}
+\cventry{2014}{{MERI Best Presentation Award, Honorable Mention}}{McPherson Eye Research Institute Symposium for ``Lightness Constancy in Surface Visualization''}{}{}{}\vspace{-3pt}
+%\cventry{2014}{{Andrew W. Mellon Workshop Grant}}{Digital Humanities Research Network}{}{}{}\vspace{-3pt}
+\cventry{2013}{{Best Poster Award}}{IEEE VIS Scientific Visualization for "Lightness Constancy in Surface Visualization"}{}{}{}\vspace{-3pt}
+\cventry{2013}{{Doctoral Colloquium}}{IEEE VIS}{}{}{}
+\cventry{2010--2012}{{Research Fellow}}{BACTER Institute, University of Wisconsin-Madison}{}{}{}\vspace{-3pt}
+\cventry{2007--2009}{{NASA Space Grant Scholar}}{NASA Space Grant}{}{}{}\vspace{-3pt}
+\cventry{2007--2009}{{Dean's List}}{University of Washington}{}{}{}\vspace{-3pt}
 
-\vspace{3pt}
+\vspace{-6pt}
 \section{\textbf{Publications}}
-\subsection{Journal Publications\protect\footnote{Note that IEEE Information Visualization conference proceedings are published as an issue of IEEE Transactions on Visualization and Computer Graphics, and EuroVis conference proceedings are published as an issue of Computer Graphics Forum.}}
+{\footnotesize Note that $s$ indicates student authors at the time of publication. Acceptance rates listed where available. Conferences are a primary publication venue in Computer \& Information Sciences. IEEE VIS conference proceedings are published as an issue of \emph{IEEE Transactions on Visualization and Computer Graphics}, and EuroVis conference proceedings are published as an issue of \emph{Computer Graphics Forum}. }\vspace{12pt}
 
-\cvpubitem{A. Sarikaya, M. Gleicher, and \textcolor{color5}{\textbf{D. Albers Szafir}}.{``The Design of Visual Summaries.''} \emph{IEEE Transactions of Visualization and Computer Graphics}, 2016. (under revision)} %(Acceptance Rate: 26\%)
-	
-%\cvpubitem{M. Correll, \textcolor{color5}{\textbf{D. Albers Szafir}}, S. Franconeri, and M. Gleicher. \href{}{``Design Considerations for Visual Aggregation in Time Series Data.''} \emph{IEEE Transactions on Visualization and Computer Graphics}, 2016 (under review).}
+\cvpaperentry{Journal Publications}{\textcolor{color5}{A. Sarikaya, M. Gleicher, \& \textbf{D. Albers Szafir}}. \href{}{``Design Factors for Summary Visualization in Visual Analytics.''} \emph{Computer Graphics Forum}, 2018. (under review)}{}{}{}{}{}
 
-\cvpubitem{\textcolor{color5}{\textbf{D. Albers Szafir}}, D. Stuffer, Y. Sohail, and M. Gleicher. \href{}{``TextDNA: Visualizing Word Usage Patterns with Configurable Colorfields.''} \emph{Computer Graphics Forum}, 2016. In the Proceedings of the Eurographics Conference on Visualization (Acceptance Rate: 26\%)}
+\cvpaperentry{}{\textcolor{color5}{\textbf{D. Albers Szafir}}.\href{http://cmci.colorado.edu/visualab/papers/colordiff_vis2017.pdf}{``Modeling Color Difference for Visualization Design.''} \emph{IEEE Transactions of Visualization and Computer Graphics}, 2018 (to appear). In the Proceedings of IEEE VIS 2017.\newline  {\small\emph{{\textbf{\color{color3}> Best Paper Award (Top paper of 170 submissions)}}}}\newline {\small\emph{> Acceptance Rate: 22.9\%}}}{}{}{}{}{} %40 of 170
 
-\cvpubitem{\textcolor{color5}{\textbf{D. Albers Szafir}}, S. Haroz, M. Gleicher, and S. Franconeri. \href{http://jov.arvojournals.org/article.aspx?articleid=2504104}{``Four Types of Ensemble Coding for Data Visualizations.''} \emph{Journal of Vision}, 16(11), 2016. (Impact Factor: 2.34)}
+\cvpaperentry{}{\textcolor{color5}{\textbf{D. Albers Szafir}}, D. Stuffer$^{(s)}$, Y. Sohail$^{(s)}$, \& M. Gleicher. \href{http://danielleszafir.com/TextDNA.pdf}{``TextDNA: Visualizing Word Usage Patterns with Configurable Colorfields.''} \emph{Computer Graphics Forum}, 35: 421--430, 2016. In the Proceedings of the Eurographics Conference on Visualization\newline {\small\emph{> Acceptance Rate: 26\%}}}{}{}{}{}{}
 
-\cvpubitem{\textcolor{color5}{\textbf{D. Albers Szafir}}, A. Sarikaya, and M. Gleicher. \href{}{``Lightness Constancy in Surface Visualization.''} \emph{IEEE Transactions on Visualization and Computer Graphics}, 2016 (to appear).}
+\cvpaperentry{}{\textcolor{color5}{\textbf{D. Albers Szafir}}, S. Haroz, M. Gleicher, \& S. Franconeri. \href{http://jov.arvojournals.org/article.aspx?articleid=2504104}{``Four Types of Ensemble Coding for Data Visualizations.''} \emph{Journal of Vision}, 16(11): 1--19, 2016.  \newline {\small\emph{> 5${th}$ highest scoring Journal of Vision paper on Altmetrics \newline > In Visualizing Data's \emph{Best of the Visualization Web}, May 2017 }}}{}{}{}{}{} %(Impact Factor: 2.34)
 
-\cvpubitem{A. Sarikaya, \textcolor{color5}{\textbf{D. Albers}}, J. Mitchell, and M. Gleicher. \href{http://graphics.cs.wisc.edu/Papers/2014/SAMG14/}{``Visualizing Validation of Protein Surface Classifiers.''} \emph{Computer Graphics Forum}, 33(3), 2014. In the Proceedings of the Eurographics Conference on Visualization. (Acceptance Rate: 25\%)} 
+\cvlistentry{}{\textcolor{color5}{\textbf{D. Albers Szafir}}, A. Sarikaya$^{(s)}$, \& M. Gleicher. \href{http://ieeexplore.ieee.org/document/7328340/}{``Lightness Constancy in Surface Visualization.''} \emph{IEEE Transactions on Visualization and Computer Graphics}, 22(9): 2107--2121, 2016.}{}{}{}{}{} %(Impact Factor: 1.4)
 
- \cvpubitem{\textcolor{color5}{\textbf{D. Albers}}, C. Dewey, and M. Gleicher. \href{http://graphics.cs.wisc.edu/Papers/2011/ADG11b/}{``Sequence Surveyor: Leveraging Overview for Scalable Genomic Alignment Visualization.''} \emph{IEEE Transactions of Visualization and Computer Graphics}, 17(5), 2011. In the Proceedings of the IEEE Information Visualization Conference. (Acceptance Rate: 25\%)} 
+\cvlistentry{}{A. Sarikaya$^{(s)}$, \textcolor{color5}{\textbf{D. Albers}}, J. Mitchell, \& M. Gleicher. \href{http://graphics.cs.wisc.edu/Papers/2014/SAMG14/}{``Visualizing Validation of Protein Surface Classifiers.''} \emph{Computer Graphics Forum}, 33(3): 171--180, 2014. In the Proceedings of the Eurographics Conference on Visualization. \newline {\small\emph{> Acceptance Rate: 25\%}}}{}{}{}{}{}
 
-\cvpubitem{M. Gleicher, \textcolor{color5}{\textbf{D. Albers}}, R. Walker, I. Jusufi, C. Hansen, and J. Roberts. \href{http://graphics.cs.wisc.edu/Papers/2011/GAWJHR11/}{``Visual Comparison for Information Visualization.''} \emph{Information Visualization}, 10(4), 2011. (Impact Factor: 0.89)} 
+ \cvlistentry{}{\textcolor{color5}{\textbf{D. Albers}}, C. Dewey, \& M. Gleicher. \href{http://graphics.cs.wisc.edu/Papers/2011/ADG11b/}{``Sequence Surveyor: Leveraging Overview for Scalable Genomic Alignment Visualization.''} \emph{IEEE Transactions of Visualization and Computer Graphics}, 17(5): 2392--2401, 2011. In the Proceedings of the IEEE Information Visualization Conference. \newline {\small\emph{> Acceptance Rate: 25\%}}}{}{}{}{}{}
 
-\vspace{3pt}
-\subsection{{Refereed Conference Publications}\protect\footnote{Note that conferences are a primary publication venue in Computer \& Information Sciences.}}
+\cvlistentry{}{M. Gleicher, \textcolor{color5}{\textbf{D. Albers}}, R. Walker, I. Jusufi$^{(s)}$, C. Hansen, \& J. Roberts. \href{http://graphics.cs.wisc.edu/Papers/2011/GAWJHR11/}{``Visual Comparison for Information Visualization.''} \emph{Information Visualization}, 10(4): 289--309, 2011.}{}{}{}{}{} % (Impact Factor: 0.89)
 
-\cvpubitem{\textcolor{color5}{\textbf{D. Albers Szafir}}, M. Stone, and M. Gleicher. \href{http://graphics.cs.wisc.edu/Papers/2014/ASG14/}{``Adapting Color Difference for Design.''} \emph{IS\&T 22nd Color and Imaging Conference}, 2014. \textbf{\color{color3} [Best Paper Award]}}
+%\vspace{3pt}
+\cvlistentry{{Refereed Conference Papers}}{M. Whitlock$^{(s)}$, E. Hanner$^{(s)}$, J. Brubaker, S. Kane, \& \textcolor{color5}{\textbf{D. Albers Szafir}}. \href{}{``Interacting with Distant Objects in Augmented Reality.''} \emph{IEEE Virtual Reality}, 2018.}{}{}{}{}{}\vspace{-6pt}
 
-\cvpubitem{M. Stone, \textcolor{color5}{\textbf{D. Albers Szafir}}, and V. Setlur. \href{}{``An Engineering Model for Color Discriminability as a Function of Size.''} \emph{IS\&T 22nd Color and Imaging Conference}, 2014.}
+\cvlistentry{}{C. Diaz$^{(s)}$, M. Walker$^{(s)}$, \textcolor{color5}{\textbf{D. Albers Szafir}}, \& D. Szafir. \href{http://danielleszafir.com/ar-depth-ismar17.pdf}{``Designing for Depth Perceptions in Augmented Reality.''} In the \emph{Proceedings of the International Symposium on Mixed and Augmented Reality (ISMAR)}, 2017. \newline {\small\emph{> Acceptance Rate: 26\%}}}{}{}{}{}{}  %31 of 117
 
-\cvpubitem{\textcolor{color5}{\textbf{D. Albers}}, M. Correll, and M. Gleicher. \href{http://graphics.cs.wisc.edu/Papers/2014/ACG14/}{``Task-Driven Evaluation of Aggregation in Time Series Visualization.''} \emph{Proceedings of the 2014 Annual Conference on Human Factors in Computing Systems (CHI)}, 2014. (Acceptance Rate: 23\%)}  
+\cvlistentry{}{\textcolor{color5}{\textbf{D. Albers Szafir}}, M. Stone, \& M. Gleicher. \href{http://graphics.cs.wisc.edu/Papers/2014/ASG14/}{``Adapting Color Difference for Design.''} In the \emph{Proceedings of the IS\&T 22nd Color and Imaging Conference}, 2014.  \newline {\small\emph{\textbf{\color{color3}> MERL Best Student Paper Award}}}}{}{}{}{}{}
 
-\cvpubitem{M. Correll, \textcolor{color5}{\textbf{D. Albers}}, S. Franconeri, and M. Gleicher. \href{http://graphics.cs.wisc.edu/Papers/2012/CAFG12/}{``Comparing Averages in Time Series Data.''} \emph{ Proceedings of the 2012 Annual Conference on Human Factors in Computing Systems (CHI)}, 2012. (Acceptance Rate: 23\%)} 
+\cvlistentry{}{M. Stone, \textcolor{color5}{\textbf{D. Albers Szafir}}, \& V. Setlur. \href{http://danielleszafir.com/2014CIC_48_Stone_v3.pdf}{``An Engineering Model for Color Discriminability as a Function of Size.''} In the \emph{Proceedings of the IS\&T 22nd Color and Imaging Conference}, 2014.\newline{\small\emph{> Integrated into D3 as \protect\href{http://gramaz.io/d3-jnd/}{d3-jnd} and Tableau 10}}}{}{}{}{}{}
 
-\vspace{3pt}
-\subsection{{Refereed Abstracts}}
+\cvlistentry{}{\textcolor{color5}{\textbf{D. Albers}}, M. Correll$^{(s)}$, \& M. Gleicher. \href{http://graphics.cs.wisc.edu/Papers/2014/ACG14/}{``Task-Driven Evaluation of Aggregation in Time Series Visualization.''} In the \emph{Proceedings of the 2014 ACM Annual Conference on Human Factors in Computing Systems (CHI)}, 2014. \newline {\small\emph{> Acceptance Rate: 23\%}}}{}{}{}{}{}  
 
-\cvpubitem{\textcolor{color5}{\textbf{D. Albers Szafir}} and M. Gleicher. {``Visualization-Aware Color Design.''} \emph{EuroVis}, 2016.}
+\cvlistentry{}{M. Correll$^{(s)}$, \textcolor{color5}{\textbf{D. Albers}}, S. Franconeri, \& M. Gleicher. \href{http://graphics.cs.wisc.edu/Papers/2012/CAFG12/}{``Comparing Averages in Time Series Data.''} In the \emph{ Proceedings of the 2012 ACM Annual Conference on Human Factors in Computing Systems (CHI)}, 2012. \newline {\small\emph{> Acceptance Rate: 23\%}}}{}{}{}{}{} 
+
+
+
+%\vspace{3pt}
+\cvlistentry{Workshops \& Colloquia\footnotemark}{A. Daughton$^{(s)}$, D. Pruss$^{(s)}$, B. Arnot$^{(s)}$, \textcolor{color5}{\textbf{D. Albers Szafir}} \& M. Paul. ``Characteristics of Behavior Discourse among Twitter Users Discussing ZIka.'' \emph{$2^{nd}$ Social Media Mining for Health Applications Workshop \& Shared Task at the 2017 American Medical Informatics Association Annual Symposium.} 2017.$^{*}$}{}{}{}{}{} 
+\footnotetext{* indicates peer-review.}
+
+\cvlistentry{}{\textcolor{color5}{\textbf{D. Albers Szafir}} \& C. Fiesler. ``A Crash-Course in P5.'' \emph{NCWIT Aspirations in Computing Colorado Affiliate.} 2017. \newline {\small\emph{> Hands-on workshop for 72 high school women}}}{}{}{}{}{} 
+
+\cvlistentry{}{\textcolor{color5}{\textbf{D. Albers Szafir}} \& D. Szafir.\href{http://cmci.colorado.edu/visualab/papers/16-c4pgv-cogload.pdf}{``Cognitive Load in Visualization: Myths and Misconceptions.''}  \emph{Creation, Curation, Critique and Conditioning of Principles and Guidelines in Visualization (C4PGV).} 2016$.^*$}{}{}{}{}{} 
+
+
+%\cvlistentry{}{\textcolor{color5}{\textbf{D. Albers Szafir}}. ``Using Graphical Perception to Drive Visualization Design.'' \emph{Visualization Summer Camp.} 2016.}{}{}{}{}{} 
+
+\cvlistentry{}{E. Alexander$^{(s)}$ \& \textcolor{color5}{\textbf{D. Albers Szafir}}. ``D3.js: Javascript for Data Visualization.'' \emph{Second Annual Digital Humanities+Art Symposium: Going Public.} 2015.}{}{}{}{}{} 
+
+\cvlistentry{}{M. Correll$^{(s)}$, E. Alexander$^{(s)}$, \textcolor{color5}{\textbf{D. Albers Szafir}}, A. Sarikaya$^{(s)}$, \& M. Gleicher. \href{http://graphics.cs.wisc.edu/Papers/2014/CAASG14/24-correll.pdf}{``Navigating Reductionism and Holism in Evaluation.''} \emph{BELIV '14: Beyond Time and Errors---Novel Evaluation Methods for Visualization}, 2014$.^*$}{}{}{}{}{} 
+
+\cvlistentry{}{\textcolor{color5}{\textbf{D. Albers Szafir}}. \href{http://pages.cs.wisc.edu/~dalbers/DHRN.pdf}{``Thinking with Data.''} \emph{Digital Humanities Research Network}, 2014.}{}{}{}{}{} 
+
+\cvlistentry{}{\textcolor{color5}{\textbf{D. Albers}}. \href{}{``Perceptually Informed Scalable Sequence Comparison.''} \emph{IEEE VIS Doctoral Colloquium}, 2013.$^*$}{}{}{}{}{} 
+
+\cvlistentry{}{\textcolor{color5}{\textbf{D. Albers}} \& Michael Gleicher. \href{}{``Seeing Double: Crowdsourced Models of Color Discrimination.''} \emph{Midgraph: Midwest Graphics Workshop}, 2012.}{}{}{}{}{} 
+
+%\subsection{Under Review}
+%\cvlistentry{In Preparation}{A. Sarikaya, M. Gleicher, and \textcolor{color5}{\textbf{D. Albers Szafir}}.{``The Design of Visual Summaries.''} \emph{IEEE Transactions of Visualization and Computer Graphics}.}{}{}{}{}{} 
+%(Acceptance Rate: 26\%)
+
+%\cvlistentry{}{M. Correll, \textcolor{color5}{\textbf{D. Albers Szafir}}, S. Franconeri, and M. Gleicher. \href{}{``Design Considerations for Visual Aggregation in Time Series Data.''}}{}{}{}{}{}
+
+%\vspace{3pt}
+\cvlistentry{{Refereed Abstracts}}{A. Kelly$^{(s)}$, M. Whitlock$^{(s)}$, B. Nickoloff$^{(s)}$, A. Lam$^{(s)}$, \textcolor{color5}{\textbf{D. Albers Szafir}}, \& S. Voida. \href{http://danielleszafir.com/becoming-butterflies.pdf}{``Becoming Butterflies: Interactive Embodiment of the Butterfly Lifecycle.''} \emph{UbiComp Poster Proceedings}, 2017.}{}{}{}{}{} 
+ %(Acceptance Rate: 26\%)
+
+
+\cvlistentry{}{D. Pruss$^{(s)}$, A. Daughton$^{(s)}$, B. Arnot$^{(s)}$, \textcolor{color5}{\textbf{D. Albers Szafir}, \& M. Paul} {``Content Analysis of Zika Related Tweets.''} \emph{American Public Health Association Annual Conference.} 2017.}{}{}{}{}{} 
+
+\cvlistentry{}{\textcolor{color5}{\textbf{D. Albers Szafir}}. {``The Effects of Size and Shape on Color Perception.''} \emph{Vision Science Society Annual Meeting}, 2017.}{}{}{}{}{} 
+
+\cvlistentry{}{\textcolor{color5}{\textbf{D. Albers Szafir}} \& M. Gleicher. \href{http://danielleszafir.com/colorposter.pdf}{``Visualization-Aware Color Design.''} \emph{EuroVis Poster Proceedings}, 2016.}{}{}{}{}{} 
+
+\cvlistentry{}{\textcolor{color5}{\textbf{D. Albers Szafir}}. ``Considering Connectivity for Visualization Design.'' \emph{Human-Computer Interaction Consortium Conference (HCIC),} 2016.}{}{}{}{}{}
 
 %\cvpubitem{\textcolor{color5}{\textbf{D. Albers Szafir}}.{``Considering Connectivity for Visualization Design.''} \emph{Human Computer Interaction Consortium}, 2016 (under review).}
 
-\cvpubitem{\textcolor{color5}{\textbf{D. Albers}}, M. Correll, M. Gleicher, and S. Franconeri. \href{http://graphics.cs.wisc.edu/Papers/2014/ACGF14}{``Ensemble Processing of Color and Shape: Beyond Mean Judgments.''} \emph{Journal of Vision}, 14(9), 2014.}
+\cvlistentry{}{\textcolor{color5}{\textbf{D. Albers}}, M. Correll$^{(s)}$, M. Gleicher, \& S. Franconeri. \href{http://graphics.cs.wisc.edu/Papers/2014/ACGF14}{``Ensemble Processing of Color and Shape: Beyond Mean Judgments.''} \emph{Journal of Vision}, 14(9), 2014.}{}{}{}{}{} 
 
-\cvpubitem{\textcolor{color5}{\textbf{D. Albers}}, A. Sarikaya, and M. Gleicher. \href{http://graphics.cs.wisc.edu/Papers/2013/ASG13/}{``Lightness Constancy in Surface Visualization.''} \emph{Poster Abstracts of IEEE VIS}, 2013. \textbf{\color{color3} [Best Poster Award]}}
+\cvlistentry{}{\textcolor{color5}{\textbf{D. Albers}}, A. Sarikaya$^{(s)}$, \& M. Gleicher. \href{http://graphics.cs.wisc.edu/Papers/2013/ASG13/}{``Lightness Constancy in Surface Visualization.''} \emph{Poster Abstracts of IEEE VIS}, 2013.\newline\emph{\small \textbf{\color{color3}> Best Poster Award, Scientific Visualization Track}} }{}{}{}{}{} 
 
-\cvpubitem{A. Sarikaya, \textcolor{color5}{\textbf{D. Albers}}, and M. Gleicher. \href{http://graphics.cs.wisc.edu/Papers/2013/SAG13/}{``Understanding Performance of Protein Structural Classifiers.''} \emph{Poster Abstracts of IEEE VIS}, 2013.} 
+\cvlistentry{}{A. Sarikaya$^{(s)}$, \textcolor{color5}{\textbf{D. Albers}}, \& M. Gleicher. \href{http://graphics.cs.wisc.edu/Papers/2013/SAG13/}{``Understanding Performance of Protein Structural Classifiers.''} \emph{Poster Abstracts of IEEE VIS}, 2013.}{}{}{}{}{} 
 
-\cvpubitem{\textcolor{color5}{\textbf{D. Albers}}, C. Dewey, and M. Gleicher. \href{http://graphics.cs.wisc.edu/Papers/2011/ADG11a/}{``Sequence Surveyor: Leveraging Overview for Large-Scale Genomic Alignment Visualization.''} \emph{Proceedings of VizBi 2011: Visualizing Biological Data}, 2011.}
+\cvlistentry{}{\textcolor{color5}{\textbf{D. Albers}}, C. Dewey, \& M. Gleicher. \href{http://graphics.cs.wisc.edu/Papers/2011/ADG11a/}{``Sequence Surveyor: Leveraging Overview for Large-Scale Genomic Alignment Visualization.''} \emph{Proceedings of VizBi 2011: Visualizing Biological Data}, 2011.}{}{}{}{}{} 
 
-\cvpubitem{\textcolor{color5}{\textbf{D. Albers}} and M. Gleicher. \href{http://graphics.cs.wisc.edu/Papers/2010/AG10a/}{``Poster: Perceptual Principles for Scalable Sequence Alignment
-Visualization.''} \emph{2010 IEEE Information Visualization Poster Proceedings}, 2010.}
+\cvlistentry{}{\textcolor{color5}{\textbf{D. Albers}} \& M. Gleicher. \href{http://graphics.cs.wisc.edu/Papers/2010/AG10a/}{``Poster: Perceptual Principles for Scalable Sequence Alignment
+Visualization.''} \emph{2010 IEEE Information Visualization Poster Proceedings}, 2010.}{}{}{}{}{} 
 
-\cvpubitem{\textcolor{color5}{\textbf{D. Albers}} and M. Gleicher. \href{http://graphics.cs.wisc.edu/Papers/2010/AG10/}{``Perceptual Principles for Scalable Sequence Alignment Visualization.''} \emph{Proceedings of the 7th Symposium on Applied Perception in Graphics and Visualization}, 2010.}
+\cvlistentry{}{\textcolor{color5}{\textbf{D. Albers}} \& M. Gleicher. \href{http://graphics.cs.wisc.edu/Papers/2010/AG10/}{``Perceptual Principles for Scalable Sequence Alignment Visualization.''} \emph{Proceedings of the 7th Symposium on Applied Perception in Graphics and Visualization}, 2010.}{}{}{}{}{} 
 
+\cvlistentry{Panel \& Symposium Organization}{C. Nothelfer$^{(s)}$, Z. Bylinskii$^{(s)}$, M. Elliott$^{(s)}$, C. Xiong$^{(s)}$, \& \textcolor{color5}{\textbf{D. Albers Szafir}}. ``Vision Science Meets Visualization.'' \emph{IEEE VIS.} Phoenix, AZ, 2017. }{}{}{}{}{}
+%Panelists: Ronald Rensink, Steven Franconeri, Karen Schloss, Todd Horowitz, \& Ruth Rosenholtz.
 %\vspace{-8pt}
-\vspace{3pt}
-\subsection{{Workshops \& Colloquia}}
-\cvpubitem{\textcolor{color5}{\textbf{D. Albers Szafir} \& D. Szafir}. ``Cognitive Load in Visualization: Myths and Misconceptions.'' \emph{Creation, Curation, Critique and Conditioning of Principles and Guidelines in Visualization (C4PGV).} 2016.}
 
-\cvpubitem{\textcolor{color5}{\textbf{D. Albers Szafir}}. ``Considering Connectivity for Visualization Design.'' \emph{Human-Computer Interaction Consortium (HCIC).} 2016.}
+\cvlistentry{}{C. Nothelfer$^{(s)}$, Z. Bylinskii$^{(s)}$, M. Elliott$^{(s)}$, C. Xiong$^{(s)}$, \& \textcolor{color5}{\textbf{D. Albers Szafir}}. ``Vision and Visualization: Inspiring Novel Research Directions in Vision Science.'' \emph{Vision Sciences Society Annual Meeting.} St. Pete's Beach, FL, 2018. }{}{}{}{}{}
 
-\cvpubitem{\textcolor{color5}{\textbf{D. Albers Szafir}}. ``Using Graphical Perception to Drive Visualization Design.'' \emph{Visualization Summer Camp.} 2016.}
+\cvlistentry{{Dissertation}}{\textcolor{color5}{\textbf{D. Albers Szafir}}. \href{}{``Utilizing Color for Perceptually-Driven Data Visualization.''} \emph{University of Wisconsin-Madison}, 2015. \newline  {\small\emph{{\textbf{\color{color3}> Honorable Mention, IEEE Visualization \& Graphics Pioneers Best Dissertation Award}}}}}{}{}{}{}{}
 
-\cvpubitem{E. Alexander and \textcolor{color5}{\textbf{D. Albers Szafir}}. ``D3.js: Javascript for Data Visualization.'' \emph{Second Annual Digital Humanities+Art Symposium: Going Public.} 2015.}
+%\cvlistentry{Dissertations}{{\textcolor{color5} \textbf{D. Albers Szafir}}. \href{}{``Utilizing Color for Perceptually-Driven Data Visualization.''} \emph{University of Wisconsin-Madison}, 2015.\newline  {\small {\textbf{\color{color3}> Honorable Mention, IEEE Visualization \& Graphics Pioneers Best Dissertation Award}}}}}{}{}{}{}{}
 
-\cvpubitem{M. Correll, E. Alexander, \textcolor{color5}{\textbf{D. Albers Szafir}}, A. Sarikaya, and M. Gleicher. \href{}{``Navigating Reductionism and Holism in Evaluation.''} \emph{BELIV '14: Beyond Time and Errors---Novel Evaluation Methods for Visualization}, 2014.}
+\section{\textbf{Talks}}
+\cvlistentry{Invited Talks \& Panels}{{{Panelist. ``Visualization and Perception Across Scales''} \emph{Learning from the Science of Cognition and Perception}, National Academy of Sciences, Washington, D.C., 2018.}}{}{}{}{}{}
 
-\cvpubitem{\textcolor{color5}{\textbf{D. Albers Szafir}}. \href{http://pages.cs.wisc.edu/~dalbers/DHRN.pdf}{``Thinking with Data.''} \emph{Digital Humanities Research Network}, 2014.}
 
-\cvpubitem{\textcolor{color5}{\textbf{D. Albers}}. \href{}{``Perceptually Informed Scalable Sequence Comparison.''} \emph{IEEE VIS Doctoral Colloquium}, 2013.}
+\cvlistentry{}{{{``Scaling up Visualization through Visual Cognition''} \emph{University of Denver}, Denver, CO, 2017.}}{}{}{}{}{}
 
-\cvpubitem{\textcolor{color5}{\textbf{D. Albers}} and Michael Gleicher. \href{}{``Seeing Double: Crowdsourced Models of Color Discrimination.''} \emph{Midgraph: Midwest Graphics Workshop}, 2012.}
+\cvlistentry{}{{{Panelist, ``Visualization and HPC.''} \emph{Rocky Mountain High Performance Computing Conference}, Boulder, CO, 2017.}}{}{}{}{}{}
 
-\vspace{3pt}
-\subsection{{Theses \& Dissertations}}
-\cvpubitem{\textcolor{color5}{\textbf{D. Albers Szafir}}. \href{}{``Utilizing Color for Perceptually-Driven Data Visualization.''} \emph{University of Wisconsin-Madison}, 2015.}
+\cvlistentry{}{{Panelist, ``Assistant Professors Panel.''} \emph{CRA New Computing Faculty Workshop}, San Diego, CA, 2017.}{}{}{}{}{} 
 
-\vspace{3pt}
-\subsection{{Invited Talks}}
-\cvpubitem{{"Perceptually-Driven Visualization of Complex Data."} Rochester Institute of Technology, Rochester, New York, 2015.}
+\cvlistentry{}{{``Facilitating a Dialogue between People \& Data: Lessons in Designing for Big Data.''} \emph{Rocky Mountain Special Libraries Association Mini-Conference}, Denver, CO, 2017.}{}{}{}{}{} 
 
-\cvpubitem{{"Perceptually-Driven Visualization of Complex Data."} \emph{Digital Arts Colloquium}, University of Iowa, Iowa City, Iowa, 2015.}
+\cvlistentry{}{{``How do we see data? Ensembles, Constancy, \& Colors.''} \emph{Information Visualization Meet-Up, Vision Science Society Annual Meeting}, St. Pete's Beach, FL, 2017.}{}{}{}{}{} 
 
-\cvpubitem{{"Perceptually-Driven Visualization of Complex Data."} \emph{Data @ ASU}, Arizona State University, Tempe, Arizona, 2015.}
+\cvlistentry{}{{``Enabling a Dialogue between People \& Data: Lessons in Designing for Big Data.''} \emph{Big Data Bootcamp}, Denver, Colorado, 2016.}{}{}{}{}{} 
 
-\cvpubitem{{"Perceptually-Driven Visualization of Complex Data."} \emph{Information Science Seminar}, University of Colorado Boulder, Boulder, Colorado, 2015.}
+\cvlistentry{}{{``Perceptually-Driven Visualization of Complex Data.''} Rochester Institute of Technology, Rochester, New York, 2015.}{}{}{}{}{} 
 
-\cvpubitem{{"Color \& Size."} \emph{Developer's Seminar.} Tableau Software, Palo Alto, CA \emph{(joint work w. Maureen Stone and Vidya Setlur)}.}
+\cvlistentry{}{{``Perceptually-Driven Visualization of Complex Data.''} \emph{Digital Arts Colloquium}, University of Iowa, Iowa City, Iowa, 2015.}{}{}{}{}{} 
 
-\cvpubitem{{``Informing Visualization in the Humanities through Perception and Genomics.''} \emph{Genres of Scholarly Knowledge Production}, Ume{\aa}  University, Ume\aa, Sweden, 2014.}
+\cvlistentry{}{{``Perceptually-Driven Visualization of Complex Data.''} \emph{Data @ ASU}, Arizona State University, Tempe, Arizona, 2015.}{}{}{}{}{} 
 
-\vspace{3pt}
-\subsection{Intramural Talks \& Lectures}
+\cvlistentry{}{{``Perceptually-Driven Visualization of Complex Data.''} \emph{Information Science Seminar}, University of Colorado Boulder, Boulder, Colorado, 2015.}{}{}{}{}{} 
 
-\cvpubitem{{``Model-View-Controller.''} \emph{Guest Lecture, ATLS 5419: Introduction to Virtual Reality}, University of Colorado Boulder, 2016.}
+\cvlistentry{}{{``Color \& Size.''} \emph{Developer's Seminar,} Tableau Software, Palo Alto, CA.}{}{}{}{}{} 
+	% \emph{(joint work w. Maureen Stone and Vidya Setlur)}.}{}{}{}{}{} 
 
-\cvpubitem{{``An Introduction to Data Visualization.''} \emph{Science Learner's Lunch}, University of Colorado Boulder, 2015.}
+\cvlistentry{}{{``Informing Visualization in the Humanities through Perception and Genomics.''} \emph{Genres of Scholarly Knowledge Production}, Ume{\aa}  University, Ume\aa, Sweden, 2014.}{}{}{}{}{} 
 
-\cvpubitem{{``Driving Scalable Visualization with Perception.''} \emph{Guest Lecture, CSCI 4830: Big Data \& HCI}, University of Colorado Boulder, 2015.}
+\cvlistentry{Intramural Talks}{{``Scaling Up Visualization through Visual Cognition.''} \emph{BioFrontiers Seminar}, University of Colorado Boulder, 2017.}{}{}{}{}{}
 
-\cvpubitem{{``Perceptually-Driven Information Visualization.''} \emph{CU Libraries Research Seminar}, University of Colorado Boulder, 2015.}
+\cvlistentry{}{{``Scaling Up Visualization through Visual Cognition.''} \emph{Leeds Business Analytics Meet-Up}, University of Colorado Boulder, 2017.}{}{}{}{}{}
 
-\cvpubitem{{``The Graphics Pipeline.''} \emph{Guest Lecture, ATLS 5419: Introduction to Virtual Reality}, University of Colorado Boulder, 2015.}
+\cvlistentry{}{{``DH+Data: How the Digital Humanities shape and are shaped by Data Science.''} \emph{Official Launch of the Center for Research Data and Digital Scholarship}, University of Colorado Boulder, 2017.}{}{}{}{}{}
 
-\cvpubitem{{``Introduction to Three.js.''} \emph{Guest Lecture, ATLS 5419: Introduction to Virtual Reality}, University of Colorado Boulder, 2015.}
+\cvlistentry{}{{``Information Visualization: Designing with Data.''} \emph{CU-Boulder Data Science Team}, University of Colorado Boulder, 2017.}{}{}{}{}{} 
 
-\cvpubitem{{``Perceptually-Driven Information Visualization.''} \emph{Institute of Cognitive Science Seminar}, University of Colorado Boulder, 2015.}
+\cvlistentry{}{{``Perceptually-Driven Information Visualization.''} \emph{Institute of Cognitive Science Seminar}, University of Colorado Boulder, 2015.}{}{}{}{}{} 
 
-\cvpubitem{{``Perceptually-Driven Information Visualization.''} \emph{Human-Centered Computing Seminar}, University of Colorado Boulder, 2015.}
+\cvlistentry{}{{``An Introduction to Data Visualization.''} \emph{Science Learner's Lunch}, University of Colorado Boulder, 2015.}{}{}{}{}{} 
 
-\cvpubitem{{``Interaction in Visualization.''} \emph{Guest Lecture, CS 838: Visualization}, University of Wisconsin-Madison, Madison, Wisconsin, 2015.}
+\cvlistentry{}{{``Perceptually-Driven Information Visualization.''} \emph{CU Libraries Research Seminar}, University of Colorado Boulder, 2015.}{}{}{}{}{} 
 
-\cvpubitem{{``Insights at a Glance: Visualization at UW-Madison.''} \emph{MERI at a Glance}, McPherson Eye Research Institute, Madison, Wisconsin, 2014.}
+\cvlistentry{}{{``Perceptually-Driven Information Visualization.''} \emph{Human-Centered Computing Seminar}, University of Colorado Boulder, 2015.}{}{}{}{}{} 
 
-\cvpubitem{{``Color for Computer Graphics.''} \emph{Guest Lecture, CS 559: Computer Graphics}, University of Wisconsin-Madison, Madison, Wisconsin, 2014.}
+\cvlistentry{}{{``Insights at a Glance: Visualization at UW-Madison.''} \emph{MERI at a Glance}, McPherson Eye Research Institute, Madison, Wisconsin, 2014.}{}{}{}{}{} 
 
-\cvpubitem{{``Image Compression.''} \emph{Guest Lecture, CS 559: Computer Graphics}, University of Wisconsin-Madison, Madison, Wisconsin, 2014.}
+%%%Guest Lectures are for my eyes only until told otherwise
+%\cvlistentry{Guest Lectures}{{``Model-View-Controller.''} \emph{ATLS 5419: Introduction to Virtual Reality}, University of Colorado Boulder, 2016.}{}{}{}{}{} 
 
-\cvpubitem{{``Perceptually-Driven Sequence Visualization.''} \emph{Guest Lecture, CS 838: Visualization}, University of Wisconsin-Madison, Madison, Wisconsin, 2012.}
+%\cvlistentry{}{{``Driving Scalable Visualization with Perception.''} \emph{CSCI 4830: Big Data \& HCI}, University of Colorado Boulder, 2015.}{}{}{}{}{} 
 
-%\vspace{-8pt}
-\vspace{3pt}
+%\cvlistentry{}{{``The Graphics Pipeline.''} \emph{ATLS 5419: Introduction to Virtual Reality}, University of Colorado Boulder, 2015.}{}{}{}{}{} 
+
+%\cvlistentry{}{{``Introduction to Three.js.''} \emph{ATLS 5419: Introduction to Virtual Reality}, University of Colorado Boulder, 2015.}{}{}{}{}{} 
+
+%\cvlistentry{}{{``Interaction in Visualization.''} \emph{CS 838: Visualization}, University of Wisconsin-Madison, Madison, Wisconsin, 2015.}{}{}{}{}{} 
+
+%\cvlistentry{}{{``Color for Computer Graphics.''} \emph{CS 559: Computer Graphics}, University of Wisconsin-Madison, Madison, Wisconsin, 2014.}{}{}{}{}{} 
+
+%\cvlistentry{}{{``Image Compression.''} \emph{CS 559: Computer Graphics}, University of Wisconsin-Madison, Madison, Wisconsin, 2014.}{}{}{}{}{} 
+
+%\cvlistentry{}{{``Perceptually-Driven Sequence Visualization.''} \emph{CS 838: Visualization}, University of Wisconsin-Madison, Madison, Wisconsin, 2012.}{}{}{}{}{} 
+
+\vspace{-12pt}
+\section{\textbf{Press Coverage}}
+\cvlistentry{}{{``A Snapshot of Current Trends in Visualization.''} \emph{IEEE Computing Now}, 2018.}{}{}{}{}{} 
+\cvlistentry{}{{``30-Under-30: Science.''} \emph{Forbes Magazine}, 2017.}{}{}{}{}{} 
+\cvlistentry{}{{``Why Visuals are the Most Important Thing in Brand Storytelling.''} \emph{Native Advertising Institute}, 2017.}{}{}{}{}{} 
+\cvlistentry{}{{``A Day in the Lab: Information Science at CU Boulder.''} \emph{ACM Interactions}, 2017.}{}{}{}{}{} 
+\cvlistentry{}{{``Grand Challenge expanded and enhanced by new projects.''} \emph{CU Boulder Today}, 2016.}{}{}{}{}{} 
+
+\vspace{-12pt}
+%\vspace{3pt}
 \section{\textbf{Funding}}
+%\cvlistentry{Under Review}{Open Remote Sensing Analytics and Collaborative Learning Environment (ORACLE)\newline
+%	{\small
+%	{\textcolor{color5}{\textbf{Amount:}}} \$2,091,000 \newline
+%	{\textcolor{color5}{\textbf{Agency:}}} Air Force SMC-RSX \newline
+%	{\textcolor{color5}{\textbf{Role:}}} Key Personnel (PI: S. Palo)\newline
+%	{\textcolor{color5}{\textbf{Duration:}}} 06.2018--05.2020}}{}{}{}{}{}
 
-\subsection{Grants}
-\cvpubitem{(Under Review) \$174,925: NSF CRII. ``Data-Driven Automation of Color Encodings for Data Visualization,'' 2016 (PI: D. Albers Szafir).}
+%\cvlistentry{2018--2020}{\$1,795,941: NSF. "BIGDATA: F: Bringing Qualitative Inductive Methodologies to Big Data Analysis.'' (PI, Co-PIs: J. Brubaker, C. Fiesler, \& M. Paul).}{}{}{}{}{} 
 
-\cvpubitem{(Under Review) \$359,424: Air Force Young Investigators Program. ``Enabling Man-Machine Collaboration in Scalable Analytics,'' 2016 (PI: D. Albers Szafir).}
+%\cvpubitem{\$655,969: NIST PSIAP. ``Data-Mediated Communication with Proximal Robots for Emergency Response,'' 09.2017 -- 05.2020 (PI, Co-PI: D. J. Szafir).}
 
-\cvpubitem{\$30,000: University of Colorado Boulder Innovative Seed Grant. ``FieldView: Using Mobile Devices to Blend Data Collection and Analysis for Field Research,'' 2016 (PI: D. Albers Szafir).}
+%\cvlistentry{2017--2018}{CU Outreach Awards. "Virtual Valley: A Cross-Community Interactive.'' (Co-PI, PI: M.L. Mcnamera).}{}{}{}{}{} 
 
-\cvpubitem{\$7,500: Andrew W. Mellon Workshop Grant. ``Digital Humanities Research Network,'' 2014.}
 
-\subsection{Fellowships}
-\cvpubitem{IEEE VIS Doctoral Colloquium, 2013.}
+%\cvlistentry{2017--2021}{\$1,400,000: NIH T32 Training Grant. ``IQ Biology: Data Intensive Biomedical Science (DIBS).'' (Senior Personel, PI: Cech).}{}{}{}{}{} 
 
-\cvpubitem{BACTER Research Fellowship. Department of Energy's Institute for Bringing Computational Techniques to Energy Research (BACTER Institute) at the University of Wisconsin-Madison, 2010-2012.}
+\cvlistentry{Funded Grants}{Collaborative Analyst-Machine Perception for Robust Data Fusion \newline {\small
+	{\textcolor{color5}{\textbf{Amount:}}} \$353,936 \newline
+	{\textcolor{color5}{\textbf{Agency:}}} Air Force SMC-RSX \newline
+	{\textcolor{color5}{\textbf{Role:}}} Co-PI (PI: N. Ahmed, Aerospace Engineering, CU Boulder)\newline
+	{\textcolor{color5}{\textbf{Duration:}}} 06.2017--05.2018}}{}{}{}{}{}
 
-\cvpubitem{NASA Space Grant Fellowship, 2007-2009.}
+\cvlistentry{}{CRII: CHS: Data-Driven Automation of Color Encodings for Data Visualization \newline
+	{\small
+		{\textcolor{color5}{\textbf{Amount:}}} \$174,925 \newline
+		{\textcolor{color5}{\textbf{Agency:}}} National Science Foundation \newline
+		{\textcolor{color5}{\textbf{Role:}}} PI\newline
+		{\textcolor{color5}{\textbf{Duration:}}} 09.2017--08.2020}}{}{}{}{}{}
 
-\vspace{3pt}
+\cvlistentry{}{Computing support for Digital Humanities at CU \newline
+	{\small
+		{\textcolor{color5}{\textbf{Amount:}}} \$46,009 \newline
+		{\textcolor{color5}{\textbf{Agency:}}} University of Colorado Boulder Innovative Seed Grant \newline
+		{\textcolor{color5}{\textbf{Role:}}} Co-PI (PI: V. Hulden)\newline
+		{\textcolor{color5}{\textbf{Duration:}}} 06.2017--05.2018}}{}{}{}{}{}
+
+
+\cvlistentry{}{FieldView: Using Mobile Devices to Blend Data Collection and Analysis for Field Research
+	\newline
+	{\small
+		{\textcolor{color5}{\textbf{Amount:}}} \$30,000 \newline
+		{\textcolor{color5}{\textbf{Agency:}}} University of Colorado Boulder Innovative Seed Grant \newline
+		{\textcolor{color5}{\textbf{Role:}}} PI (Co-PI: Daniel Szafir, ATLAS Institute, CU Boulder)\newline
+		{\textcolor{color5}{\textbf{Duration:}}} 07.2016--12.2017}}{}{}{}{}{}
+	
+\cvlistentry{}{Digital Humanities Research Network\newline
+	{\small
+		{\textcolor{color5}{\textbf{Amount:}}} \$7,500 \newline
+		{\textcolor{color5}{\textbf{Agency:}}} Andrew W. Mellon Workshop Grant \newline
+		{\textcolor{color5}{\textbf{Role:}}} Coordinator (Lead Coordinators: Molly Wright Steenson, Journalism, UW-Madison \& Catherine DeRose, English, UW-Madison) \newline
+		%, Coordination Team: Eric Alexander, Joshua Armstrong, Mattie Burkert, Brandee Easter, Jesse Stommel, \& Mark Vareschi)\newline
+		{\textcolor{color5}{\textbf{Duration:}}} 09.2014--08.2015}}{}{}{}{}{}
+
+
+\cvlistentry{Corporate Gifts}{Information Visualization Hackathon Sponsorship
+	\newline
+	{\small
+		{\textcolor{color5}{\textbf{Amount:}}} \$10,000 \newline
+		{\textcolor{color5}{\textbf{Organization:}}} Zayo Group \newline
+		{\textcolor{color5}{\textbf{Role:}}} PI\newline
+		{\textcolor{color5}{\textbf{Date Received:}}} 01.2017}}{}{}{}{}{}
+
+\cvlistentry{Fellowships \& Travel Grants}{Schloss-Dagstuhl NSF Support Grant 	\newline
+	{\small
+		{\textcolor{color5}{\textbf{Sponsor:}}} National Science Foundation \newline
+		{\textcolor{color5}{\textbf{Date Received:}}} 10.2017}}{}{}{}{}{}
+	
+\cvlistentry{}{IEEE VIS Doctoral Colloquium Travel Fellowship	\newline
+	{\small
+		{\textcolor{color5}{\textbf{Sponsor:}}} IEEE VIS \newline
+		{\textcolor{color5}{\textbf{Date Received:}}} 10.2013}}{}{}{}{}{}
+
+\cvlistentry{}{BACTER Research Fellowship	\newline
+	{\small
+		{\textcolor{color5}{\textbf{Sponsor:}}} Department of Energy \& the BACTER Institute \newline
+		{\textcolor{color5}{\textbf{Duration:}}} 06.2010--05.2012}}{}{}{}{}{}
+%	. Department of Energy's Institute for Bringing Computational Techniques to Energy Research (BACTER Institute)
+
+\cvlistentry{}{NASA Space Grant Fellowship	\newline
+	{\small
+		{\textcolor{color5}{\textbf{Sponsor:}}} NASA \newline
+		{\textcolor{color5}{\textbf{Duration:}}} 09.2007--06.2009}}{}{}{}{}{} 
+
 \section{\textbf{Teaching}}
 %\cventry{2010--Present}{{Graduate Researcher}}{Department of Computer Sciences}{University of Wisconsin-Madison}{}
 %{Conducting research on data visualization under Professor Michael Gleicher, with a focus on improving the scalability and interpretability of visual analysis systems.\vspace{6pt} \newline
@@ -283,68 +459,86 @@ Visualization.''} \emph{2010 IEEE Information Visualization Poster Proceedings},
 %{Designed lectures on visualization interaction methods and perceptually-motivated visualization design for a combined graduate and undergraduate visualization course.\vspace{6pt}\newline
 	%Lectured on  with an emphasis on topics in biological sequence analysis for a graduate visualization course.\vspace{6pt}\newline
 %	Redesigned curriculum for color in computer graphics for an undergraduate graphics course.}
-\cventry{2016}{{Co-Instructor}}{INFO 1201: Computational Reasoning I}{University of Colorado Boulder}{}
-{Co-designed new course in introductory computer programming delivered to 135 undergraduates.}
-\cventry{2009}{{Teaching Assistant}}{Human-Computer Interaction}{University of Wisconsin-Madison}{}
-{}
+\cventry{Sp. 2018}{INFO 4602/5602: Information Visualization}{{University of Colorado Boulder}}{}{}
+{\small {\textcolor{color5}{\textbf{Enrollment:}}}60 students (20 undergraduates and 40 graduates)}\vspace{6pt}
+\cventry{F. 2017}{INFO 3401: Information Exploration}{{University of Colorado Boulder}}{}{}
+{\small First offering, required course for Information Science\\ {\textcolor{color5}{\textbf{Enrollment:}}}9 students\vspace{6pt}}
+%\newline I designed a new hands-on, project-driven course teaching principles of exploratory data analysis and information synthesis. Topics include data collection, fusion, and integrity; qualitative and quantitative analysis techniques; and visual and predictive analytics. The course synthesizes skills from earlier human-computer interaction, statistics, and computing courses to prepare students to solve applied data science problems. }\vspace{6pt}
+\cventry{Sp. 2017}{INFO 4602/5602: Information Visualization}{{University of Colorado Boulder}}{}{}
+{\small First offering\\ {\textcolor{color5}{\textbf{Enrollment:}}}40 students (22 undergraduates and 18 graduates)\\{\textcolor{color5}{\textbf{Mean Instructor Rating:}}} 5.3/6.0}\vspace{6pt}
+	%\newline I designed a new project-based course focusing on concepts in information visualization and visual analytics. Topics include the history of visualization, visual perception, web development, and experiment design. Projects in the course enabled direct interaction between the students and local industry partners. The course was delivered to students from a diverse variety of fields, including Information Science, Computer Science, Social Science, Psychology, and Anthropology. }\vspace{6pt}
+\cventry{F. 2016}{INFO 1201: Computational Reasoning I}{{University of Colorado Boulder, Co-Instructor: Stephen Voida}}{}{}
+{First offering, required course for the College of Media, Communication, and Information\\{\textcolor{color5}{\textbf{Enrollment:}}} 142 undergraduate students \\
+	{\textcolor{color5}{\textbf{Mean Instructor Rating:}}} 5.00/6.00}\vspace{6pt}
+	%\newline I co-designed a new course teaching principles of computer science and introductory programming. The course satisfies the core technical competency objectives of the new College of Media, Communication, and Information by contextualizing lectures and assignments in fields relevant to students' areas of study, including data analysis and media manipulation. The course was delivered to students from a diverse variety of fields, including Information Science, Media Studies, Communication, Advertising, and Design. }\vspace{6pt}
+\cventry{F. 2009}{{CS838: Human-Computer Interaction}}{{University of Wisconsin-Madison}}{}{}
+{\small 
+	{\textcolor{color5}{\textbf{Enrollment:}}} 8 graduate students\\
+	Teaching Assistant for first offering}\vspace{6pt}
 	%Assisted students with concepts from the first graduate-level human-computer interaction course offered by the University.
-\cventry{2009}{{Laboratory Instructor}}{Introduction to Programming}{University of Wisconsin-Madison}{}
-{
-	Mean Instructor Rating: 4.58/5.00
+\cventry{F. 2009}{CS 302: Introduction to Programming}{\small {University of Wisconsin-Madison}}{}{}
+{\small
+	{\textcolor{color5}{\textbf{Enrollment:}}} 110 undergraduate students \\
+	{\textcolor{color5}{\textbf{Mean Instructor Rating:}}} 4.58/5.00}\vspace{3pt}
 	%Supervised four semester-long hands-on programming sessions and worked one-on-one with students in an introductory programming course (mean instructor rating: 4.58/5.00).
-	 }%\vspace{6pt} \newline
+	 %\vspace{6pt} \newline
 %Worked one-on-one with students to enforce course concepts in weekly office hours. }
 %\vspace{-9pt}
-\cventry{2008--2009}{{Mathematics and English Instructor}}{Kumon of Redmond}{Redmond, WA}{}{}
+%\cventry{2008--2009}{{Mathematics and English Instructor}}{\emph{Kumon of Redmond}}{}{}{}
 	%Instructed K-12 and adult students in concepts from mathematics and English, working with small groups of students progressing through individualized curricula. %\vspace{6pt} \newline
 	%Served as the principle tutor for advanced mathematics and assisted with course planning and student progress assessment.
 
-
-\vspace{3pt}
+\vspace{-6pt}
 \section{\textbf{Mentorship \& Advising}}
-\subsection{{Thesis Committee Membership}}
-\cvlistentry{2016}{\textcolor{color5}{\textbf{Brett Roads}}, Ph.D. Thesis, Advisor: Michael Mozer \newline
-	\emph{The Design of Efficient Training and Decision-Support Systems for Visual Categorization} \newline
-	Department of Computer Science, University of Colorado Boulder
-}{}{}{}{}
+\vspace{-3pt}
+\subsection{{Ph.D. Students}}
+\cvlistentry{2017--Present}{\textcolor{color5}{\textbf{Stephen Smart}}, Computer Science, University of Colorado Boulder}{}{}{}{} \vspace{-3pt}
+\cvlistentry{2016--Present}{\textcolor{color5}{\textbf{Matthew Whitlock}}, Computer Science, University of Colorado Boulder}{}{}{}{} \vspace{-3pt}
+\cvlistentry{2016--Present}{\textcolor{color5}{\textbf{Michael Iuzzolino}}, Computer Science, University of Colorado Boulder \newline \emph{\small > Co-advised with Daniel Szafir}}{}{}{}{} \vspace{-3pt}
 
-\cvlistentry{2015}{\textcolor{color5}{\textbf{Khalid Alharbi}}, Ph.D. Thesis, Advisor: Tom Yeh \newline
-	\emph{A Deep and Longitudinal Approach to Mining Mobile Applications} \newline
-	Department of Computer Science, University of Colorado Boulder
+
+\subsection{{Ph.D. Thesis Committee Membership}}
+\cvlistentry{2017}{\textcolor{color5}{\textbf{Brett Roads}}, Ph.D. Thesis, Department of Computer Science, University of Colorado Boulder \newline {
+	\emph{The Design of Efficient Training and Decision-Support Systems for Visual Categorization}, Advisor: Michael Mozer}
+}{}{}{}{}\vspace{-3pt}
+\cvlistentry{2015}{\textcolor{color5}{\textbf{Khalid Alharbi}}, Ph.D. Thesis, Department of Computer Science, University of Colorado Boulder \ \newline{
+	\emph{A Deep and Longitudinal Approach to Mining Mobile Applications}, Advisor: Tom Yeh
+	}
 	}{}{}{}{}
 	
-\vspace{3pt}
-\subsection{{Ph.D. Students}}
-\cventry{2016}{\textbf{Michael Iuzzolino (w. Daniel Szafir)}}{University of Colorado Boulder}{}{}{}
-\cventry{2016}{\textbf{Dasha Pruss (w. Michael Paul)}}{ University of Colorado Boulder}{}{}{}
-	\cventry{2016}{\textbf{Matthew Whitlock}}{University of Colorado Boulder}{}{}{}
 	
-	
-\vspace{3pt}
+\vspace{-6pt}
 \subsection{{Masters Students}}
-\cventry{2016}{\textbf{Praveen Devaraj (as Thesis Committee Chair)}}{\emph{Using Visualization to Enable Human-Machine Collaboration} \newline
-	University of Colorado Boulder}{}{}{}
-\cventry{2016}{\textbf{Yogitha Madhasu}}{\emph{Visual Analytics for Inductive Scholarship} \newline
-	University of Colorado Boulder}{}{}{}
-\cventry{2016}{\textbf{Shashidhar Prabhu}}{\emph{Visualizing Data in the Internet of Things} \newline
-	University of Colorado Boulder}{}{}{}
+\cvlistentry{2017--Present}{\textcolor{color5}{\textbf{Keke Wu}}, Creative Technologies, University of Colorado Boulder }{}{}{}{} \vspace{-3pt}
+\cvlistentry{2017--Present}{\textcolor{color5}{\textbf{Hayeong Song}}, Computer Science, University of Colorado Boulder }{}{}{}{} \vspace{-3pt} %\newline \emph{An Accessible Analytics Pipeline for Data Fusion in Social Media}
+\cvlistentry{2016--Present}{\textcolor{color5}{\textbf{Pratima Sherkane}}, Computer Science, University of Colorado Boulder }{}{}{}{} \vspace{-3pt}%\newline \emph{Predictive Decision-Making with Time Series Visualization}
+\cvlistentry{2016--Present}{\textcolor{color5}{\textbf{Hemang Bansal}}, Computer Science, University of Colorado Boulder }{}{}{}{} \vspace{-3pt}%\newline \emph{Model Design Structures in Color Encodings}
+\cvlistentry{2016--2017}{\textcolor{color5}{\textbf{Dasha Pruss}}, Information Science, University of Colorado Boulder \newline \emph{\small > co-advised with Michael Paul\newline> Now at the University of Pittsburgh Philosophy of Science Ph.D. Program} }{}{}{}{}\vspace{-3pt}
+\cvlistentry{2017}{\textcolor{color5}{\textbf{Mridula Natarjan}}, Computer Science, University of Colorado Boulder }{}{}{}{}\vspace{-3pt} %\newline \emph{Tracing the Discussions of Zika in Social Media}
+\cvlistentry{2016--2017}{\textcolor{color5}{\textbf{Praveen Devaraj}}, Computer Science, University of Colorado Boulder}{}{}{}{} \vspace{-3pt}% \newline \emph{Using Visualization to Enable Human-Machine Collaboration}
+\cvlistentry{2016--2017}{\textcolor{color5}{\textbf{Yogitha Madhasu}}, Computer Science, University of Colorado Boulder \newline \emph{\small > Now at VISA} }{}{}{}{} \vspace{-3pt}%\newline \emph{Visual Analytics for Inductive Scholarship.}}
+\cvlistentry{2016}{\textcolor{color5}{\textbf{Shashidhar Prabhu}}, Computer Science, University of Colorado Boulder }{}{}{}{} %\newline \emph{Visualizing Data in the Internet of Things}
 
-\vspace{3pt}
+%\vspace{3pt}
+%\subsection{M.S. Thesis Committee Membership}
+%\cvlistentry{2016}{\textcolor{color5}{\textbf{Justin Chin}}, M.S. Thesis, Advisor: Gregor Henze \newline
+%	\emph{Virtual Reality Visualizations for Building Energy Management} \newline
+%	Department of Civil Engineering, University of Colorado Boulder
+%}{}{}{}{}
+
+\vspace{-6pt}
 \subsection{{Undergraduate Students}}
-\cventry{2016}{\textbf{Tetsumichi Umada}}{\emph{Using Visualization to Enable Human-Machine Collaboration} \newline
-	University of Colorado Boulder}{}{}{}
-\cventry{2016}{\textbf{Ryan Mustari}}{\emph{Statistically Controlled Synthetic Data Generation} \newline
-	University of Colorado Boulder}{}{}{}
-\cventry{2016}{\textbf{Alex Thompson}}{\emph{Visualizing Data in Augmented Reality} \newline
-	University of Colorado Boulder}{}{}{}
-\cventry{2016}{\textbf{Connor Mcguinness} (now at Uber)}{\emph{Color Encodings for Ordinal Data} \newline
-	University of Colorado Boulder}{}{}{}
-\cventry{2015}{\textbf{Yusef Suhail}}{\emph{Web-based N-Grams Visualization with TextDNA} \newline
-		University of Wisconsin-Madison}{}{}{}
-\cventry{2014}{\textbf{Andrew Hermus}}{\emph{Scalable Visualization for Text Analytics} (w. Eric Alexander)\newline
-		University of Wisconsin-Madison}{}{}{}
-\cventry{2013}{\textbf{Benjamin Reddersen}}{\emph{Rendering Techniques for Molecular Surface Visualization}\newline
-		University of Wisconsin-Madison}{}{}{}
+\cvlistentry{2017--present}{\textcolor{color5}{\textbf{Michael Xiao}}, Computer Science, University of Colorado Boulder\newline \emph{\small > 2017-2018 Discovery Learning Assistant}}{}{}{}{} \vspace{-3pt} 
+\cvlistentry{2016--present}{\textcolor{color5}{\textbf{Tetsumichi Umada}}, Computer Science, University of Colorado Boulder}{}{}{}{} \vspace{-3pt} % \newline \emph{Using Visualization to Enable Human-Machine Collaboration
+\cvlistentry{2017}{\textcolor{color5}{\textbf{Wil Braun}}, Computer Science, University of Colorado Boulder}{}{}{}{} \vspace{-3pt} 
+% \newline \emph{Statistically Controlled Synthetic Data Generation
+\cvlistentry{2017}{\textcolor{color5}{\textbf{Girishkumar Ramkumar}}, Computer Science, University of Colorado Boulder}{}{}{}{} \vspace{-3pt} % \newline \emph{Visual Analytics for Inductive Scholarship
+\cvlistentry{2016--2017}{\textcolor{color5}{\textbf{Ryan Mustari}}, Applied Mathematics \& Economics, University of Colorado Boulder \newline \emph{\small > 2016-2017 UROP Recipient}}{}{}{}{} \vspace{-3pt} %
+\cvlistentry{2016}{\textcolor{color5}{\textbf{Alex Thompson}}, Computer Science, University of Colorado Boulder }{}{}{}{} \vspace{-3pt} %\newline \emph{Visualizing Data in Augmented Reality}
+\cvlistentry{2016}{\textcolor{color5}{\textbf{Connor Mcguinness}}, Computer Science, University of Colorado Boulder \newline \emph{\small > Now at Uber} }{}{}{}{} \vspace{-3pt}%\newline \emph{Color Encodings for Ordinal Data}
+\cvlistentry{2015--2016}{\textcolor{color5}{\textbf{Yusef Suhail}}, Computer Science, University of Wisconsin-Madison }{}{}{}{} \vspace{-3pt} %\newline \emph{Web-based N-Grams Visualization with TextDNA}
+\cvlistentry{2014}{\textcolor{color5}{\textbf{Andrew Hermus}}, Computer Science, University of Wisconsin-Madison \newline \emph{\small > Co-supervised with Eric Alexander}\newline \emph{\small > Now at Microsoft}}{}{}{}{} \vspace{-3pt} % \newline \emph{Scalable Visualization for Text Analytics} 
+\cvlistentry{2013}{\textcolor{color5}{\textbf{Benjamin Reddersen}}, Computer Science, University of Wisconsin-Madison}{}{}{}{} % \newline \emph{Rendering Techniques for Molecular Surface Visualization}
 
 %\vspace{3pt}
 %\subsection{{Industry}}
@@ -364,8 +558,8 @@ Visualization.''} \emph{2010 IEEE Information Visualization Poster Proceedings},
 
 %\vspace{3pt}
 \section{\textbf{Professional Activities \& Service}}
-\subsection{{Professional Outreach}}
-\cventry{2016} {Aspirations in Computing Colorado Affiliate Committee}{National Center for Women in Technology}{}{}{}
+\subsection{{Outreach}}
+\cventry{2016--present} {Aspirations in Computing Colorado Affiliate Committee}{National Center for Women in Technology}{}{}{}
 \cventry{2010--2015}{{ACM-W Mentor}}{Department of Computer Sciences, University of Wisconsin-Madison}{}{}{}
 %Mentored 15 undergraduate women in computer sciences with interests in computer graphics and visualization.
 \cventry{2009}{{Majors Fair Representative}}{Department of Computer Sciences, University of Wisconsin-Madison}{}{}{}
@@ -374,16 +568,19 @@ Visualization.''} \emph{2010 IEEE Information Visualization Poster Proceedings},
 %Guided elementary school students through a series of hands-on activities and presentations from computer science researchers.
 
 
-\vspace{3pt}
+\vspace{-6pt}
 \subsection{{University Service}}
-\cventry{2016}{Co-Chair, Digital Humanities Certificate Committee}{University of Colorado Boulder}{}{}{}
-\cventry{2016}{External Programs Coordinator}{Department of Information Science, University of Colorado Boulder}{}{}{}
+\cventry{2017 - present}{Advisory Board Member, Center for Research Data \& Digital Scholarship (CRDDS)}{University of Colorado Boulder}{}{}{}
+\cventry{2016 - present}{Co-Chair, Digital Humanities Certificate Committee}{University of Colorado Boulder\newline{\small\emph{> Resulted in creation of a new interdisciplinary graduate certificate program}}}{}{}{}
+\cventry{2015 - present}{{Graduate Program Committee}}{Department of Information Science, University of Colorado Boulder}{}{}{}
+\cventry{2015 - present}{{Graduate Program Committee}}{Department of Computer Science, University of Colorado Boulder}{}{}{}
+\cventry{2016--present}{{Curriculum Committee: Computing Core}}{Department of Information Science, University of Colorado Boulder}{}{}{}
+\cventry{2018}{Faculty Search Commitee}{Department of Information Science, University of Colorado Boulder}{}{}{}
+\cventry{2016 - 2017}{External Programs Coordinator}{Department of Information Science, University of Colorado Boulder}{}{}{}
 \cventry{2016}{Faculty Search Committee}{Leeds School of Business, University of Colorado Boulder}{}{}{}
-\cventry{2015 - 2016}{{Graduate Program Committee}}{Department of Information Science, University of Colorado Boulder}{}{}{}
-\cventry{2015 - 2016}{{Graduate Program Committee}}{Department of Computer Science, University of Colorado Boulder}{}{}{}
 \cventry{2015-2016}{{Community and Diversity Committee}}{College of Media, Communication, and Information, University of Colorado Boulder}{}{}{}
 \cventry{2015-2016}{{Research Data Advisory Committee}}{University of Colorado Boulder}{}{}{}
-\cventry{2015}{{Curriculum Committee}}{Department of Information Science, University of Colorado Boulder}{}{}{}
+\cventry{2015}{{Curriculum Creation Committee}}{Department of Information Science, University of Colorado Boulder\newline{\small\emph{> Designed novel undergraduate and graduate curricula in Information Science, focusing on the intersection of data, people, and technology. These curricula blend topics from computer science, social science, and data science, emphasizing broad application of these skills across different domains. }}}{}{}{}
 \cventry{2015}{{Faculty Search Committee}}{Department of Information Science, University of Colorado Boulder}{}{}{}
 \cventry{2014--2015}{{Digital Humanities Research Network Founding Member \& Coordinator}}{University of Wisconsin-Madison}{}{}{}
 %{Coordinating bi-weekly meetings for a Mellon-funded working group on the digital humanities, bringing together researchers from over a dozen departments at the University of Wisconsin-Madison.}
@@ -392,22 +589,39 @@ Visualization.''} \emph{2010 IEEE Information Visualization Poster Proceedings},
 %from computer science, English, journalism, environmental sciences, human ecology, and cartography.}
 \cventry{2015}{Organizing Committee Member}{University of Wisconsin-Madison Digital Humanities+Art Symposium}{}{}{}
 
+\vspace{-6pt}
+\subsection{{Program Committee Membership}}
+\cvlistentry{2017--present}{Human Computer Interaction Consortium}{}{\newline \emph{> Colorado Governing Board Representative}}{}{}{}\vspace{-6pt}
+\cvlistentry{2017--present}{European Conference on Visualization State-of-the-Art Reports (EuroVis STARs)}{}{}{}{}{}\vspace{-6pt}
+\cvlistentry{2017--present}{IEEE VIS Information Visualization}{}{}{}{}{}\vspace{-6pt}
+\cvlistentry{2017}{VDS: Visual Data Science Symposium}{}{}{}{}{}\vspace{-6pt}
+\cvlistentry{2017}{VISSOFT: IEEE Working Conference on Software Visualization}{}{}{}{}{}\vspace{-6pt}
+\cvlistentry{2016--2017}{LDAV: IEEE Symposium on Large Data Analysis and Visualization}{}{}{}{}{}\vspace{-6pt}
+\cvlistentry{2014--2016}{BioVis: Symposium on Biological Data Visualization}{}{}{}{}{}
 
-\vspace{3pt}
-\subsection{{Program Committees \& Referee Service}}
-\cventry{2014--2016}{Program Committee Member}{BioVis: Symposium on Biological Data Visualization}{}{}{}
-\cventry{2016}{Program Committee Member}{LDAV: IEEE Symposium on Large Data Analysis and Visualization}{}{}{}
-\cventry{2013--2016}{Reviewer}{IEEE Information Visualization \newline \small{\emph{Special Recognition: 2014, 2015}}}{}{}{}
-\cventry{2016}{Reviewer}{LDAV: IEEE Symposium on Large Data Analysis and Visualization}{}{}{}
-\cventry{2013--2016}{Reviewer}{BioVis: Symposium on Biological Data Visualization}{}{}{}
-\cventry{2016}{Reviewer}{IEEE RO-MAN: IEEE Conference on Robot and Human Interactive Communication}{}{}{}
-\cventry{2014, 2016}{Reviewer}{BMC Medical Informatics and Decision Making}{}{}{}
-\cventry{2015--2016}{Reviewer}{IEEE Visual Analytics Science and Technology (VAST)}{}{}{}
-\cventry{2016}{Reviewer}{ACM Conference on Human Factors in Computing Systems (CHI) \newline \small{\emph{Special Recognition: 2016}}}{}{}{}
-\cventry{2016}{Reviewer}{Eurographics Conference on Visualization}{}{}{}
-\cventry{2015}{Reviewer Ad Hoc}{National Science Foundation Information Integration and Informatics (III)}{}{}{}
-\cventry{2015}{Reviewer}{Informatics}{}{}{}
-\cventry{2015}{Reviewer}{Transactions on Cartography and Geographic Information Science}{}{}{}
+\vspace{-6pt}
+\subsection{Grant Referee Service}
+\cvlistentry{2018}{Reviewer, Research Innovation Office Innovative Seed Grants}{}{}{}{}{}\vspace{-6pt}
+\cvlistentry{2017}{Reviewer Ad Hoc, Icelandic Research Foundation}{}{}{}{}{}\vspace{-6pt}
+\cvlistentry{2017}{Reviewer, National Science Foundation}{}{}{}{}{}\vspace{-6pt}
+\cvlistentry{2015, 2017}{Reviewer Ad Hoc, National Science Foundation}{}{}{}{}{}
+
+\vspace{-6pt}
+\subsection{Journal \& Conference Referee Service}
+\cvlistentry{2018}{Science Advances}{}{}{}{}{}\vspace{-6pt}
+\cvlistentry{2018}{IEEE TBD: Transactions on Big Data}{}{}{}{}{}\vspace{-6pt}
+\cvlistentry{2016--2018}{EuroVis: Eurographics Conference on Visualization}{}{}{}{}{}\vspace{-6pt}
+\cvlistentry{2017}{IEEE TVCG: IEEE Transactions on Visualization and Computer Graphics}{}{}{}{}{}\vspace{-6pt}
+\cvlistentry{2017}{IEEE TVCG: IEEE Transactions on Visualization and Computer Graphics}{}{}{}{}{}\vspace{-6pt}
+\cvlistentry{2016--2017}{ACM CHI: ACM Conference on Human Factors in Computing Systems \newline \small{{\textcolor{color5}{\textbf{Special Recognition:}}} 2016}}{}{}{}{}{}\vspace{-6pt}
+\cvlistentry{2013--2017}{IEEE Information Visualization \newline \small{{\textcolor{color5}{\textbf{Special Recognition:}}} 2014, 2015}}{}{}{}{}{}\vspace{-6pt}
+\cvlistentry{2016--2017}{IEEE LDAV: IEEE Symposium on Large Data Analysis and Visualization}{}{}{}{}{}\vspace{-6pt}
+\cvlistentry{2015--2017}{IEEE VAST: Visual Analytics Science and Technology}{}{}{}{}{}\vspace{-6pt}
+\cvlistentry{2013--2016}{BioVis: Symposium on Biological Data Visualization}{}{}{}{}{}\vspace{-6pt}
+\cvlistentry{2016}{IEEE RO-MAN: IEEE Conference on Robot and Human Interactive Communication}{}{}{}{}{}\vspace{-6pt}
+\cvlistentry{2014, 2016}{BMC Medical Informatics and Decision Making}{}{}{}{}{}\vspace{-6pt}
+\cvlistentry{2015--2016}{Informatics}{}{}{}{}{}\vspace{-6pt}
+\cvlistentry{2015}{Cartography and Geographic Information Science)}{}{}{}{}{}
 
 %\vspace{-12pt}
 %\subsection{{Other Experience}}
@@ -417,29 +631,34 @@ Visualization.''} \emph{2010 IEEE Information Visualization Poster Proceedings},
 %\section{\textbf{Computing Languages}}
 %\cvsubentrynocomma{Programming:}{}{}{JavaScript, Java, Python, C\#, C++, C, SQL, ActionScript, XML, HTML, PHP, Ruby, Haskell, Scheme}{}{}
 %\cvsubentrynocomma{Scientific:}{}{}{JMP, Matlab, R}{}{}
-\vspace{3pt}
+\vspace{-6pt}
 \subsection{{Professional \& Academic Memberships}}
 %\cvmembers{}{ACM Student Member \vspace{3pt}\\ Sigma Alpha Lambda Honor Society}{}{IEEE Student Member \vspace{3pt}\\ Phi Theta Kappa International Honor Society} %international
-
-\cvlistentry{2010--Present}{ACM Member}{}{}{}{}
-\cvlistentry{2014--2015}{IS\&T Student Member}{}{}{}{}
-\cvlistentry{2012--2015}{WHCI+D Member}{}{}{}{}
-\cvlistentry{2010--2015}{IEEE Student Member}{}{}{}{}
-\cvlistentry{2008--Present}{Sigma Alpha Lambda Honor Society Member}{}{}{}{}
+\cvlistentry{2018--Present}{Sigma Xi Full Member}{}{}{}{}\vspace{-6pt}
+\cvlistentry{2010--Present}{ACM Member}{}{}{}{}\vspace{-6pt}
+\cvlistentry{2010--Present}{IEEE Member}{}{}{}{}\vspace{-6pt}
+\cvlistentry{2015, 2017}{Vision Science Society Member}{}{}{}{}\vspace{-6pt}
+\cvlistentry{2014--2015}{IS\&T Student Member}{}{}{}{}\vspace{-6pt}
+\cvlistentry{2012--2015}{WHCI+D Member}{}{}{}{}\vspace{-6pt}
+\cvlistentry{2008--Present}{Sigma Alpha Lambda Honor Society Member}{}{}{}{}\vspace{-6pt}
 \cvlistentry{2008--Present}{Phi Theta Kappa International Honor Society Member}{}{}{}{}
 
-\vspace{3pt}
-\subsection{{Volunteer Positions}}
-\cventry{2009--2014}{{Web Manager}}{University of Wisconsin-Madison Women's Hockey Club}{}{}{}
-\cventry{2011--2012}{{Assistant Practice Coach}}{Wisconsin Timberwolves Special Needs Hockey Team}{}{}{}
-\cventry{2010}{{GRE Tutor}}{University of Wisconsin-Madison}{}{}{}
-\cventry{2007--2008}{{Ice Hockey Officiating Mentor}}{Cascade Hockey Officiating Association}{}{}{}
+%\vspace{-6pt}
+%\subsection{{Volunteer Positions}}
+%\cvlistentry{2009--2014}{{Web Manager}, University of Wisconsin-Madison Women's Hockey Club}{}{}{}{} \vspace{-6pt}
+%\cvlistentry{2011--2012}{{Assistant Practice Coach}, Wisconsin Timberwolves Special Needs Hockey Team}{}{}{}{} \vspace{-6pt}
+%\cvlistentry{2010}{{GRE Tutor}, University of Wisconsin-Madison}{}{}{}{} \vspace{-6pt}
+%\cvlistentry{2007--2008}{{Ice Hockey Officiating Mentor}, Cascade Hockey Officiating Association}{}{}{}{}
 
-\vspace{3pt}
-\section{\textbf{Professional References}}
-\cvmembers{}{\textcolor{color5}{\textbf{Michael Gleicher, Professor}}\\ Department of Computer Sciences \\ University of Wisconsin-Madison \\ 1210 W. Dayton Street \\ Madison, WI 53706 \\ gleicher@cs.wisc.edu \vspace{9pt} \\ \\
-\textcolor{color5}{\textbf{Maureen Stone, Research Scientist}}\\ Tableau Software \\ 837 N. 34th Street, Suite 200 \\ Seattle, WA 98103 \\ mstone@tableausoftware.com}{}{\textcolor{color5}{\textbf{Steven Franconeri, Associate Professor}}\\ Department of Psychology \\ Northwestern University \\ Swift Hall 102, 2029 Sheridan Road \\ Evanston, IL 60208 \\ franconeri@northwestern.edu \vspace{9pt} \\ \\
-\textcolor{color5}{\textbf{Kevin Ponto, Assistant Professor}}\\ Design Studies Department \\ University of Wisconsin-Madison \\ 330 N. Orchard Street \\ Madison, WI 53715 \\ kbponto@wisc.edu}
+\vspace*{\fill}
+\color{color3}
+\genhrulefill*[.25ex]\quad {\large Professional references available upon request.} \quad\genhrulefill*[.25ex]
+
+%\subsection{Professional references available upon request}
+%\section{\textbf{Professional References}}
+%\cvmembers{}{\textcolor{color5}{\textbf{Michael Gleicher, Professor}}\\ Department of Computer Sciences \\ University of Wisconsin-Madison \\ gleicher@cs.wisc.edu \vspace{9pt} \\
+%\textcolor{color5}{\textbf{Maureen Stone, Research Scientist}}\\ Tableau Software \\  mstone@tableausoftware.com}{}{\textcolor{color5}{\textbf{Steven Franconeri, Associate Professor}}\\ Department of Psychology \\ Northwestern University  \\ franconeri@northwestern.edu \vspace{9pt} \\ 
+%\textcolor{color5}{\textbf{Kevin Ponto, Assistant Professor}}\\ Design Studies Department \\ University of Wisconsin-Madison \\ kbponto@wisc.edu}
 %\vspace{8pt}
 
 %\cvmembers{Honorable Mention, McPherson Eye Research Institute Best Student Presentation 2014 \vspace{6pt}\\

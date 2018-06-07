@@ -437,9 +437,20 @@
 		\ifthenelse{\equal{#3}{}}{}{{\slshape\small#3}}%
 		\ifthenelse{\equal{#4}{}}{}{\small#4}%
 		\ifthenelse{\equal{#5}{}}{}{\small#5}%
-		\ifthenelse{\equal{#6}{}}{}{\newline{}\small#6}\vspace{6pt}
+		\ifthenelse{\equal{#6}{}}{}{\newline{}\small#6}\vspace{3pt}
 	}}%
 	%  \ifthenelse{\equal{#6}{}}{}{\cvline[0pt]{}{\small#6}}}
+	
+\newcommand*{\cvpaperentry}[6]{%
+	\cvitem{#1}{%
+		{#2}%
+		\ifthenelse{\equal{#3}{}}{}{{\slshape\small#3}}%
+		\ifthenelse{\equal{#4}{}}{}{\small#4}%
+		\ifthenelse{\equal{#5}{}}{}{\small#5}%
+		\ifthenelse{\equal{#6}{}}{}{\newline{}\small#6}\vspace{6pt}
+}}%
+%  \ifthenelse{\equal{#6}{}}{}{\cvline[0pt]{}{\small#6}}}
+
 
 % makes a generic hyperlink
 % usage: \link[optional text]{link}
